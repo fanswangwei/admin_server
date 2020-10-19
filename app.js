@@ -56,6 +56,7 @@ const login = require('./routes/login')
 app.use(login.routes()).use(login.allowedMethods())
 const news = require('./routes/news')
 app.use(news.routes()).use(news.allowedMethods())
+
 // koa静态资源服务器
 app.use(static(path.join(__dirname, './static')))
 

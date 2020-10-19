@@ -33,7 +33,8 @@ async function uploadFile(ctx, options) {
     let result = { 
       success: false,
       message: '',
-      data: null
+      data: null,
+      errno: 0
     }
     // 解析请求文件事件
     busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
@@ -48,9 +49,7 @@ async function uploadFile(ctx, options) {
       file.on('end', function() {
         result.success = true
         result.message = '文件上传成功'
-        result.data = {
-          pictureUrl: `${ctx.host}/${fileType}/${fileName}`
-        }
+        result.data = [`http://${ctx.host}/${fileType}/${fileName}`]
         console.log('文件上传成功！')
         resolve(result)
       })

@@ -4,8 +4,9 @@ let ctc_news_Schma = new mongoose.Schema({
     title: String,
     remark: String,
     type: String,
-    editor: String,
-    createdTime: Date
+    coverUrl: String,
+    content: String,
+    createdTime: Number
 })
 // 连接数据库file表
 module.exports = mongoose.model('ctc_news', ctc_news_Schma, 'ctc_news')
