@@ -1,5 +1,4 @@
 const Router = require('koa-router'),
-	config = require('../config'),
 	ctc_news_Schma = require('../dbs/models/ctc_news')
 const router = new Router()
 
@@ -80,10 +79,7 @@ router.get('/news/get', async (ctx) => {
 	ctx.body = {
 		code: 200,
 		total: total,
-		data: results.map((item) => {
-			item.url = config.filePath + item.url
-			return item
-		}),
+		data: results
 	}
 })
 

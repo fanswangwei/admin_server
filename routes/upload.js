@@ -24,11 +24,6 @@ async function uploadFile(ctx, options) {
 	let req = ctx.req,
 		res = ctx.res;
   const busboy = new Busboy({ headers: req.headers });
-  let fileType = options.fileType || 'common'
-  let filePath = path.join( options.path,  fileType)
-
-	// 判断文件夹是否存在，不存在就创建
-  mkdirsSync(filePath)
   return new Promise((resolve, reject) => {
     let result = { 
       success: false,
@@ -38,6 +33,11 @@ async function uploadFile(ctx, options) {
     }
     // 解析请求文件事件
     busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
+      console.log(mimetype)
+      let fileType = mimetype.split('/')[0] || 'common'
+      let filePath = path.join( options.path,  fileType)
+      // 判断文件夹是否存在，不存在就创建
+      mkdirsSync(filePath)
       let fileName = Math.random().toString(16).substr(2) + '.' + getSuffixName(filename)
       let _uploadFilePath = path.join( filePath, fileName )
       let saveTo = path.join(_uploadFilePath)
@@ -73,7 +73,8 @@ async function uploadFile(ctx, options) {
 router.post('/upload', async (ctx) => {
 	console.log(ctx.req.file)
 	data = await uploadFile(ctx, {
-		path: path.join(__dirname, '../static'),
+    path: path.join(__dirname, '../static'),
+    // path: '/Users/wangwei/work/HEYD/uploadFile'
 	})
 	ctx.body = data
 })

@@ -1,4 +1,4 @@
 {
   "host": "http://127.0.0.1:9999",
-  "DB_CONN_STR": "mongodb://admin:admin888@127.0.0.1:27017/ctcctc"
+  "DB_CONN_STR": "mongodb://admin:admin888@8.129.3.87:27017/ctcctc"
 }
