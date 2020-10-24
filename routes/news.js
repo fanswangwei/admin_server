@@ -29,7 +29,7 @@ router.post('/news/add', async (ctx) => {
 
 router.post('/news/delete', async (ctx) => {
   let params = ctx.request.body
-  console.log(params);
+  // console.log(params);
 	await ctc_news_Schma.deleteOne(params, function (err, doc) {
 		if (err) {
       ctx.body = {
@@ -58,7 +58,11 @@ router.get('/news/get', async (ctx) => {
 	let condition = {}
 	for (let item in params) {
 		if (params[item]) {
-			condition[item] = new RegExp(params[item])
+			if(item == 'id' || item == '_id' || item == "createdTime"){
+				condition[item] = params[item]
+			}else {
+				condition[item] = new RegExp(params[item])
+			}
 		}
 	}
 	let total = await ctc_news_Schma.countDocuments(condition)
