@@ -50,7 +50,7 @@ router.post('/news/delete', async (ctx) => {
 router.get('/news/get', async (ctx) => {
 	let params = ctx.request.query
 	let pageNum = parseInt(params.pageNum) || 1,
-		pageSize = parseInt(params.pageSize) || 10
+		pageSize = parseInt(params.pageSize) || 999
 
 	params.pageNum = ''
 	params.pageSize = ''
