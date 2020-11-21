@@ -27,6 +27,26 @@ router.post('/news/add', async (ctx) => {
 	}
 })
 
+router.post('/news/edit', async (ctx) => {
+	let params = ctx.request.body
+	// 新建数据、保存数据
+	ctc_news_Schma.update({_id: params._id}, {$set: params}, function (err) {
+    if (err) {
+      console.log('mongo error: ', err)
+      ctx.body = {
+        code: 500,
+        data: err
+      }
+      return;
+    }
+  });
+	ctx.body = {
+		code: 200,
+		data: params,
+		msg: 'success',
+	}
+})
+
 router.post('/news/delete', async (ctx) => {
   let params = ctx.request.body
   // console.log(params);
